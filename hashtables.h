@@ -3,17 +3,19 @@ File Edit Options Buffers Tools C++ Help
 #include <cstring>
 #include "node.h"
 #include <vector>
+#include "student.h"
 
 using namespace std;
 
-class hash(){
+class hash{
  public:
   hash(int size);
   ~hash();
-  void insert(int key, student*);
-  student* info(int key);
-  void remove(int key);
+  void insert(int key, Student* nstudent);
+  Student* info(int key, Student* nstudent);
+  void remove(int key, Student* nstudent);
   int hashkey(int key);
  public:
-  vector<student*> table;
-}
+  node* table[];
+  int hashsize = 0;
+};
