@@ -28,6 +28,7 @@ hashtables::~hashtables() {//desturctor
     Node* currentNode = table[i];
     while (currentNode != NULL) {
       Node* nextNode = currentNode->getNext();
+      delete currentNode->getstudent();
       delete currentNode;
       currentNode = nextNode;
     }
