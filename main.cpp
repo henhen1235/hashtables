@@ -16,6 +16,7 @@ using namespace std;
 
 void addS(hashtables* table);//prepare the functions
 void printS(hashtables* table);
+void randomS(hashtables* table);
 void deleteS(hashtables* table);
 
 
@@ -40,7 +41,7 @@ int main(){
             deleteS(table);
         }
         else if (strcmp(command, random) == 0){
-            //do this_________________________________________________________________________________________________________________________________________________________
+            randomS(table);
         }
         else if (strcmp(command, quit) == 0){//if they run the command quit then delete all the students in the vector list
             delete table;
@@ -50,6 +51,7 @@ int main(){
             cout << "Your input was not valid your options are: add, print, delete, random, quit.";//their command isn't valid
         }
     }
+   delete table;
 }
 
 
@@ -67,14 +69,14 @@ void addS(hashtables* table){//adding a new student function
     cin >> gpa;
     cout << "What is the student's ID?:";
     cin >> ID;
-    newStudent->makestudent(fname, lname, gpa, ID);
+    newStudent->makestudent(fname, lname, ID, gpa);
     table->insert(ID, newStudent);
     cout << "Done" << endl;
 }
 
 
 void printS(hashtables* table){//function for printing students
-    int command;
+    int command = 0;
     cout << "Which student would you like to print? Input their ID:" << endl;//ask the user for the Id they would like to search
     cin >> command;
     Student* nstudent = table->info(command);
@@ -84,7 +86,7 @@ void printS(hashtables* table){//function for printing students
     else{
         cout << "This student is called" << nstudent->getfirst()
         << " " << nstudent->getlast() << endl << "They have a gpa of: " 
-        << nstudent->getGPA() << endl << "Their ID is: " << nstudent->getID();
+        << nstudent->getGPA() << endl << "Their ID is: " << nstudent->getID() << endl;
     }
 }
 
@@ -96,4 +98,8 @@ void deleteS(hashtables* table) {//function for deleting students
     table->remove(del);
 
     cout << "This student has been deleted" << endl;//if the id doesn't exist then print it out.
+}
+
+void randomS(hashtables* table){
+    
 }
