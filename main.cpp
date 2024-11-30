@@ -4,6 +4,7 @@ Henry Xu
 C++
 Student List
 */
+//imports
 #include <iostream>
 #include <vector>
 #include <iomanip>
@@ -60,7 +61,7 @@ int main(){
 void randomS(hashtables* table){
     //getting first names from the file
     char fnames[100][50];
-    ifstream MyReadFile("firstname.txt");
+    ifstream MyReadFile("firstnames.txt");
     int i = 0;
     while (MyReadFile && i < 100) {
         char letters[50];
@@ -71,26 +72,40 @@ void randomS(hashtables* table){
         }
     }
     MyReadFile.close();
-    //getting last names from the file
+
+    // Getting last names from the file
     char lnames[100][50];
-    ifstream MyReadFile("lastname.txt");
-    int i = 0;
-    while (MyReadFile && i < 100) {
+    ifstream MyReadFile2("lastname.txt");
+    i = 0;
+    while (MyReadFile2 && i < 100) {
         char letters[50];
-        if (MyReadFile.getline(letters, 50)) {
-            strncpy(fnames[i], letters, 49);
-            fnames[i][49] = '\0';
+        if (MyReadFile2.getline(letters, 50)) {
+            strncpy(lnames[i], letters, 49); //Store in lnames
+            lnames[i][49] = '\0';
             i++;
         }
     }
-    MyReadFile.close();
+    MyReadFile2.close();
+
 
     int times = 0;
     cout << "How many times would you like to create a random student?:" << endl;//ask the user for the Id they would like to search
     cin >> times;
+    srand(time(0));
+    int checkid = 0;
 
-    for(int x = 0; x > times; x++){
+    for(int x = 0; x < times; x++){//creating a random student
+        Student* newStudent = new Student;
+        int firstnamenum = rand() % 100;
+        int lastnamenum = rand() % 100;
 
+        float gpa = static_cast<float>(rand()) / RAND_MAX * 4.0;;
+        while (table->info(checkid) != NULL){
+            checkid++;
+        }
+        newStudent->makestudent(fnames[firstnamenum], lnames[lastnamenum], checkid, gpa);
+        table->insert(checkid, newStudent);
+        cout << "first name: " << fnames[firstnamenum] << ", last name: " << lnames[lastnamenum] << ", ID: " << checkid << ", GPA: " << gpa << endl;
     }
 }
 
@@ -132,10 +147,10 @@ void printS(hashtables* table){//function for printing students
 void deleteS(hashtables* table) {//function for deleting students
     int del;
     cout << "Which student would you like to delete? Print out their ID: ";
-    cin >> del;//find their ID and save it.
+    cin >> del;
 
     table->remove(del);
 
-    cout << "This student has been deleted" << endl;//if the id doesn't exist then print it out.
+    cout << "This student has been deleted" << endl;
 }
 

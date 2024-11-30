@@ -8,15 +8,15 @@ using namespace std;
 
 class hashtables{
  public:
-  hashtables(int size);
-  ~hashtables();
-  void insert(int key, Student* nstudent);
-  Student* info(int key);
-  void remove(int key);
-  void rehash();
-  int hashkey(int key);
+  hashtables(int size);//constructor
+  ~hashtables();//destructor
+  void insert(int key, Student* nstudent);//inserting student
+  Student* info(int key);//getting student
+  void remove(int key);//removing student
+  void rehash();//rehashing if needed
+  int hashkey(int key);//hashing the key
  public:
-  Node** table;
-  int hashsize = 0;
-  int studentnum = 0;
+  Node** table;//table for storage
+  int hashsize = 0;//size of the hash table
+  int studentnum = 0;//amount of students added
 };
