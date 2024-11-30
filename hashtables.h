@@ -13,8 +13,10 @@ class hashtables{
   void insert(int key, Student* nstudent);
   Student* info(int key);
   void remove(int key);
+  void rehash();
   int hashkey(int key);
  public:
   Node** table;
   int hashsize = 0;
+  int studentnum = 0;
 };

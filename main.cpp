@@ -17,13 +17,6 @@ int main(){
 }
 
 /*
-struct Student {//create the class
-    char firstName[50];
-    char lastName[50];
-    int studentID;
-    float gpa;
-};
-
 
 void addS(vector<Student*> &studentslist);//prepare the functions
 void printS(vector<Student*> &studentslist);
