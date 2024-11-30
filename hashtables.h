@@ -1,4 +1,3 @@
-File Edit Options Buffers Tools C++ Help
 #include <iostream>
 #include <cstring>
 #include "node.h"
@@ -7,15 +6,15 @@ File Edit Options Buffers Tools C++ Help
 
 using namespace std;
 
-class hash{
+class hashtables{
  public:
-  hash(int size);
-  ~hash();
+  hashtables(int size);
+  ~hashtables();
   void insert(int key, Student* nstudent);
-  Student* info(int key, Student* nstudent);
-  void remove(int key, Student* nstudent);
+  Student* info(int key);
+  void remove(int key);
   int hashkey(int key);
  public:
-  node* table[];
+  Node** table;
   int hashsize = 0;
 };

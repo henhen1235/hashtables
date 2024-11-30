@@ -5,60 +5,84 @@
 #include "hashtables.h"
 #include <vector>
 
+using namespace std;
 
-//using namespace std;
-
-hash::hash(int size){
+hashtables::hashtables(int size){
   hashsize = size;
-  node* table[size];
+  table = new Node*[size];
   for (int x = 0; x < size; x++){
-    table[size] = NULL;
+    table[x] = NULL;
   }
 }
 
-int hash::hashkey(int key){
+hashtables::~hashtables() {
+  for (int i = 0; i < hashsize; i++) {
+    Node* currentNode = table[i];
+    while (currentNode != NULL) {
+      Node* nextNode = currentNode->getNext();
+      delete currentNode;
+      currentNode = nextNode;
+    }
+  }
+  delete[] table;
+}
+
+
+int hashtables::hashkey(int key){
   int nkey = key % hashsize;
   return nkey;
 }
 
-void hash::insert(int key, Student* nstudent){
+void hashtables::insert(int key, Student* nstudent){
   int nkey = hashkey(key);
-  Node* currentnode = table.at(nkey);
-  if(currentnode == NULL){ 
-    Node* node1 = new node(nstudent);
+  Node* currentnode = table[nkey];
+
+  Node* nNode = new Node(nstudent);
+
+  if(table[nkey] == NULL){ 
+    table[nkey] = nNode;
   }
   else{
-    while(currentnode != NULL){
-      currentnode = currentnode->getnext();
+    while(currentnode->getNext() != NULL){
+      currentnode = currentnode->getNext();
     }
-    Node* node1 = new node(nstudent);
-    currentnode->setnext(node1);
+    currentnode->setNext(nNode);
   }
  }
 
-Student* hash::info(int key, Student* nstudent){
+Student* hashtables::info(int key){
   int nkey = hashkey(key);
-  Node* currentnode = table.at(nkey);
-  while (currentnode->getstudent() != nstudent){
-    currentnode = currentnode->getnext();
-    //   student* tstudent = currentnode->getstudent();
-    //int tkey = tstudent->getID();
-    //int nkey = hashkey(tkey);
+  Node* currentnode = table[nkey];
+
+  while (currentnode->getstudent()->getID() != key && currentnode != NULL){
+    currentnode = currentnode->getNext();
   }
-  Student* nstudent = currentnode->getstudent();
-  return nstudent;
+
+  if(currentnode == NULL){
+    return NULL;
+  }
+  else{
+    return currentnode->getstudent();
+  }
 }
 
-void hash::remove(int key, Student* nstudent){
-   int nkey = hashkey(int key);
-  Node* currentnode = table.at(nkey);
-  while (currentnode->getstudent() != nstudent){
-    currentnode = currentnode->getnext();
-    //   student* tstudent = currentnode->getstudent();
-    //int tkey = tstudent->getID();
-    //int nkey = hashkey(tkey);
+void hashtables::remove(int key){
+  int nkey = hashkey(key);
+  Node* currentnode = table[nkey];
+  Node* beforenode = NULL;
+  bool Firstnode = true;
+
+  while (currentnode->getstudent()->getID() != key){
+    beforenode = currentnode;
+    currentnode = currentnode->getNext();
+    Firstnode = false;
+  }
+
+  if(Firstnode == true){
+    table[nkey] = currentnode->getNext();
+  }
+  else{
+    beforenode->setNext(currentnode->getNext());
   }
   delete currentnode;  
 }
-
-
