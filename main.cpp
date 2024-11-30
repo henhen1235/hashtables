@@ -12,6 +12,9 @@ Student List
 #include "node.h"
 #include "student.h"
 #include "hashtables.h"
+#include <fstream>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 void addS(hashtables* table);//prepare the functions
@@ -54,6 +57,42 @@ int main(){
    delete table;
 }
 
+void randomS(hashtables* table){
+    //getting first names from the file
+    char fnames[100][50];
+    ifstream MyReadFile("firstname.txt");
+    int i = 0;
+    while (MyReadFile && i < 100) {
+        char letters[50];
+        if (MyReadFile.getline(letters, 50)) {
+            strncpy(fnames[i], letters, 49);
+            fnames[i][49] = '\0';
+            i++;
+        }
+    }
+    MyReadFile.close();
+    //getting last names from the file
+    char lnames[100][50];
+    ifstream MyReadFile("lastname.txt");
+    int i = 0;
+    while (MyReadFile && i < 100) {
+        char letters[50];
+        if (MyReadFile.getline(letters, 50)) {
+            strncpy(fnames[i], letters, 49);
+            fnames[i][49] = '\0';
+            i++;
+        }
+    }
+    MyReadFile.close();
+
+    int times = 0;
+    cout << "How many times would you like to create a random student?:" << endl;//ask the user for the Id they would like to search
+    cin >> times;
+
+    for(int x = 0; x > times; x++){
+
+    }
+}
 
 void addS(hashtables* table){//adding a new student function
     Student* newStudent = new Student;//create a new student
@@ -100,6 +139,3 @@ void deleteS(hashtables* table) {//function for deleting students
     cout << "This student has been deleted" << endl;//if the id doesn't exist then print it out.
 }
 
-void randomS(hashtables* table){
-    
-}
