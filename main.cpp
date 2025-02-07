@@ -130,18 +130,19 @@ void addS(hashtables* table){//adding a new student function
 
 
 void printS(hashtables* table){//function for printing students
-    int command = 0;
-    cout << "Which student would you like to print? Input their ID:" << endl;//ask the user for the Id they would like to search
-    cin >> command;
-    Student* nstudent = table->info(command);
-    if(nstudent == NULL){
-        cout << "This person does not exist" << endl;
-    }
-    else{
-        cout << "This student is called" << nstudent->getfirst()
-        << " " << nstudent->getlast() << endl << "They have a gpa of: " 
-        << nstudent->getGPA() << endl << "Their ID is: " << nstudent->getID() << endl;
-    }
+  //int command = 0;
+  //cout << "Which student would you like to print? Input their ID:" << endl;//ask the user for the Id they would like to search
+  //cin >> command;
+  //Student* nstudent = table->info(command);
+  //if(nstudent == NULL){
+  //    cout << "This person does not exist" << endl;
+  //}
+  //else{
+  //    cout << "This student is called" << nstudent->getfirst()
+  //    << " " << nstudent->getlast() << endl << "They have a gpa of: " 
+  //    << nstudent->getGPA() << endl << "Their ID is: " << nstudent->getID() << endl;
+  //}
+  table->print();
 }
 
 void deleteS(hashtables* table) {//function for deleting students

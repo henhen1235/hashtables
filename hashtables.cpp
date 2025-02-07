@@ -86,6 +86,23 @@ void hashtables::rehash(){//function for rehashing
     delete[] otable;
 }
 
+void hashtables::print(){
+  for (int x = 0; x < hashsize; x++){
+    Node* currentnode = table[x];
+    if (currentnode != NULL){
+      cout << "Name: "<< currentnode->getstudent()->getfirst() <<" " << currentnode->getstudent()->getlast() << endl <<
+	"ID: " << currentnode->getstudent()->getID() << "GPA: " << currentnode->getstudent()->getGPA() << endl;
+    while(currentnode->getNext() != NULL){
+      currentnode = currentnode->getNext();
+      cout << "Name: "<< currentnode->getstudent()->getfirst() <<" " << currentnode->getstudent()->getlast() << endl <<
+        "ID: " << currentnode->getstudent()->getID() << "GPA: " << currentnode->getstudent()->getGPA() << endl;
+
+    }
+  }
+  }
+}
+
+
 void hashtables::insert(int key, Student* nstudent){//inserting
   int nkey = hashkey(key);//get the key
   studentnum = studentnum + 1;

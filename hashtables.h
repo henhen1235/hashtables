@@ -14,6 +14,7 @@ class hashtables{
   Student* info(int key);//getting student
   void remove(int key);//removing student
   void rehash();//rehashing if needed
+  void print();
   int hashkey(int key);//hashing the key
  public:
   Node** table;//table for storage
